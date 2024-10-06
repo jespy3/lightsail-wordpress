@@ -18,8 +18,8 @@ chmod a+r /etc/apt/keyrings/docker.asc
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update
 
 # At this point, you can list available versions with:
 #apt-cache madison docker-ce | awk '{ print $3 }'
@@ -28,7 +28,7 @@ sudo apt-get update
 VERSION_STRING=5:27.3.1-1~debian.12~bookworm
 
 # Install Docker with
-sudo apt-get install -y \
+apt install -y \
   docker-ce=$VERSION_STRING \
   docker-ce-cli=$VERSION_STRING \
   containerd.io \
