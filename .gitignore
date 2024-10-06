@@ -1,2 +1,7 @@
 db-data/
 wp-data/
+
+**/.terraform/
+**/terraform.tfstate
+**/terraform.tfstate.backup
+
