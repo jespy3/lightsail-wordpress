@@ -6,3 +6,7 @@ data "aws_ssm_parameter" "ls_keypair" {
   name = "/lightsail-wordpress/terraform-vars/ls_keypair"
 }
 
+data "aws_ssm_parameter" "allowed_ip" {
+  name = "/lightsail-wordpress/terraform-vars/allowed_ip"
+}
+

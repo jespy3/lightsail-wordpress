@@ -45,6 +45,13 @@ cat <<EOL > /home/admin/compose.yaml
 DOCKER_COMPOSE_CONTENTS
 EOL
 
-# Start up the wordpress and mysql containers
-docker compose up -d
+if [ -f /home/admin/compose.yaml ]; then
+    echo "compose.yaml created successfully."
+
+    # Start up the wordpress and mysql containers
+    docker compose -f /home/admin/compose.yaml up -d
+else
+    echo "Failed to create compose.yaml."
+fi
+
 
