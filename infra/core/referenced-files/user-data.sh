@@ -39,3 +39,10 @@ apt-get install -y \
 apt-get install -y docker-compose-plugin
 
 echo "Completed installing Docker and docker compose."
+
+# Create the compose.yaml file, where DOCKER_COMPOSE_CONTENTS is replaced by terraform file
+cat <<EOL > /home/admin/compose.yaml
+DOCKER_COMPOSE_CONTENTS
+EOL
+
+
