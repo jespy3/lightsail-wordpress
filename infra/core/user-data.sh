@@ -36,5 +36,6 @@ apt-get install -y \
   docker-compose-plugin
 
 # Installing docker compose
+apt-get install -y docker-compose-plugin
 
-
+echo "Completed installing Docker and docker compose."
