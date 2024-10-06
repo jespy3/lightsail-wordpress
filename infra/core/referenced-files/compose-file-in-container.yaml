@@ -1,1 +1,40 @@
-#TEST to see if this file shows up on the container
+services:
+  db:
+    image: mysql:5.7   # Recommended stable MySQL version by Wordpress
+    container_name: wordpress_db
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_net
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: jibpass  # Define the root password for the database
+      MYSQL_DATABASE: wordpress                # Create a default database for WordPress
+      MYSQL_USER: jib               # Define a non-root user for WordPress
+      MYSQL_PASSWORD: jibpass       # Define the password for the WordPress user
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress_app
+    depends_on:
+      - db
+    ports:
+      - "8080:80"       # Expose port 8080 on your Lightsail instance to access WordPress
+    volumes:
+      - wp_data:/var/www/html
+    networks:
+      - wp_net
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306               # Connect to the MySQL database
+      WORDPRESS_DB_USER: jib        # Same credentials as above
+      WORDPRESS_DB_PASSWORD: jibpass
+      WORDPRESS_DB_NAME: wordpress
+
+volumes:
+  db_data:    # Persistent volume for MySQL data
+  wp_data:    # Persistent volume for WordPress data
+
+networks:
+  wp_net:
+
