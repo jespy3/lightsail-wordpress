@@ -45,3 +45,6 @@ cat <<EOL > /home/admin/compose.yaml
 DOCKER_COMPOSE_CONTENTS
 EOL
 
+# Start up the wordpress and mysql containers
+docker compose up -d
+
