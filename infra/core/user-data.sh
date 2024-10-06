@@ -4,12 +4,12 @@ echo "Hello World! Executing the user-data script to install Docker and Docker C
 
 # Removing potential conflicting packages with the Docker installation
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do \
-  apt remove $pkg; \
+  apt-get remove $pkg; \
 done
 
 # Add Docker's official GPG key
-apt update
-apt install ca-certificates curl
+apt-get update
+apt-get install -y ca-certificates curl
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 chmod a+r /etc/apt/keyrings/docker.asc
@@ -19,7 +19,7 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
-apt update
+apt-get update
 
 # At this point, you can list available versions with:
 #apt-cache madison docker-ce | awk '{ print $3 }'
@@ -28,10 +28,13 @@ apt update
 VERSION_STRING=5:27.3.1-1~debian.12~bookworm
 
 # Install Docker with
-apt install -y \
+apt-get install -y \
   docker-ce=$VERSION_STRING \
   docker-ce-cli=$VERSION_STRING \
   containerd.io \
   docker-buildx-plugin \
   docker-compose-plugin
+
+# Installing docker compose
+
 
