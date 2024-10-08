@@ -2,7 +2,7 @@ resource "aws_lightsail_instance" "wordpress_and_db" {
   name              = "wordpress_and_db"
   availability_zone = "us-west-2d"
   blueprint_id      = "debian_12"
-  bundle_id         = "nano_3_0"
+  bundle_id         = "micro_3_0"
   key_pair_name     = local.ls_keypair
   ip_address_type   = "ipv4"
 
