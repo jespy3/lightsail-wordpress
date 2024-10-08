@@ -29,14 +29,18 @@ resource "aws_lightsail_instance_public_ports" "instance_ports" {
     to_port   = 8080
     cidrs     = ["${local.allowed_ip}/32"]
   }
+
+  lifecycle {
+    ignore_changes = [port_info]
+  }
 }
 
-resource "aws_lightsail_key_pair" "ls_kp" {
-  name = local.ls_keypair
-}
+# resource "aws_lightsail_key_pair" "ls_kp" {
+#   name = local.ls_keypair
+# }
 
-output "private_key" {
-  value     = aws_lightsail_key_pair.ls_kp.private_key
-  sensitive = true
-}
+# output "private_key" {
+#   value     = aws_lightsail_key_pair.ls_kp.private_key
+#   sensitive = true
+# }
 
