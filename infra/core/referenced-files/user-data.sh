@@ -59,7 +59,7 @@ mkdir -p /mnt/wordpress-db
 
 # Add fstab entry if it doesn't already exist
 if ! grep -q "/mnt/wordpress-db" /etc/fstab; then
-  echo "dev/xvdf /mnt/wordpress-db ext4 defaults,nofail 0 2" >> /etc/fstab
+  echo "/dev/xvdf /mnt/wordpress-db ext4 defaults,nofail 0 2" >> /etc/fstab
 fi
 
 # Mount all filesystems
