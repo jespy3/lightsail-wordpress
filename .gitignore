@@ -6,3 +6,4 @@ wp-data/
 **/terraform.tfstate.backup
 
 **/.env
+**/*.sql
