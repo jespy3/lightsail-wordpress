@@ -1,6 +1,10 @@
+locals {
+  az = "us-west-2d"
+}
+
 resource "aws_lightsail_instance" "wordpress_and_db" {
   name              = "wordpress_and_db"
-  availability_zone = "us-west-2d"
+  availability_zone = local.az
   blueprint_id      = "debian_12"
   bundle_id         = "micro_3_0"
   key_pair_name     = local.ls_keypair
@@ -35,12 +39,15 @@ resource "aws_lightsail_instance_public_ports" "instance_ports" {
   }
 }
 
-# resource "aws_lightsail_key_pair" "ls_kp" {
-#   name = local.ls_keypair
-# }
+resource "aws_lightsail_disk" "db_data" {
+  name              = "db_data"
+  size_in_gb        = 8
+  availability_zone = local.az
+}
 
-# output "private_key" {
-#   value     = aws_lightsail_key_pair.ls_kp.private_key
-#   sensitive = true
-# }
+resource "aws_lightsail_disk_attachment" "db_data_attachment" {
+  disk_name     = aws_lightsail_disk.db_data.name
+  instance_name = aws_lightsail_instance.wordpress_and_db.name
+  disk_path     = "/dev/xvdf"
+}
 
