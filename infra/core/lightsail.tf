@@ -43,6 +43,10 @@ resource "aws_lightsail_disk" "db_data" {
   name              = "db_data"
   size_in_gb        = 8
   availability_zone = local.az
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_lightsail_disk_attachment" "db_data_attachment" {
