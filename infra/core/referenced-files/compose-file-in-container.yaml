@@ -3,7 +3,7 @@ services:
     image: mysql:5.7   # Recommended stable MySQL version by Wordpress
     container_name: wordpress_db
     volumes:
-      - ./db_data:/var/lib/mysql
+      - /mnt/wordpress-db:/var/lib/mysql # Mount the block storage volume
     networks:
       - wp_net
     restart: always
