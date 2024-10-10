@@ -57,6 +57,9 @@ fi
 # Create the mount point if it doesn't exist
 mkdir -p /mnt/wordpress-db
 
+# Change ownership of the mounted volume to the MySQL user in the container "999"
+chown -R 999:999 /mnt/wordpress-db
+
 # Add fstab entry if it doesn't already exist
 if ! grep -q "/mnt/wordpress-db" /etc/fstab; then
   echo "/dev/xvdf /mnt/wordpress-db ext4 defaults,nofail 0 2" >> /etc/fstab
