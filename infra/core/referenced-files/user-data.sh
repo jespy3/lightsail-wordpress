@@ -48,17 +48,12 @@ EOL
 if [ -f /home/admin/compose.yaml ]; then
     echo "compose.yaml created successfully."
 
-    # Start up the wordpress and mysql containers
-    docker compose -f /home/admin/compose.yaml up -d
 else
     echo "Failed to create compose.yaml."
 fi
 
 # Create the mount point if it doesn't exist
 mkdir -p /mnt/wordpress-db
-
-# Change ownership of the mounted volume to the MySQL user in the container "999"
-chown -R 999:999 /mnt/wordpress-db
 
 # Add fstab entry if it doesn't already exist
 if ! grep -q "/mnt/wordpress-db" /etc/fstab; then
@@ -67,4 +62,17 @@ fi
 
 # Mount all filesystems
 mount -a
+
+# Change ownership of the mounted volume to the MySQL user in the container "999"
+chown -R 999:999 /mnt/wordpress-db
+
+# Verify the mount was successful
+if mountpoint -q /mnt/wordpress-db; then
+    echo "Disk mounted successfully."
+
+    # Start up the wordpress and mysql containers
+    docker compose -f /home/admin/compose.yaml up -d
+else
+    echo "Failed to mount disk. Not starting Docker containers."
+fi
 
