@@ -47,7 +47,6 @@ EOL
 
 if [ -f /home/admin/compose.yaml ]; then
     echo "compose.yaml created successfully."
-
 else
     echo "Failed to create compose.yaml."
 fi
@@ -72,7 +71,15 @@ if mountpoint -q /mnt/wordpress-db; then
 
     # Start up the wordpress and mysql containers
     docker compose -f /home/admin/compose.yaml up -d
+    sleep 5
 else
     echo "Failed to mount disk. Not starting Docker containers."
 fi
+
+PUBLICIP=$(curl -s ipinfo.io/ip)
+
+docker exec -i wordpress_db mysql -u root -pjibpass -e '\
+  USE wordpress; \
+	UPDATE wp_options SET option_value = "http://$PUBLICIP:8080" WHERE option_name = "siteurl"; \
+	UPDATE wp_options SET option_value = "http://$PUBLICIP:8080" WHERE option_name = "home";'
 
