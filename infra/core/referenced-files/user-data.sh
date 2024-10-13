@@ -78,8 +78,8 @@ fi
 
 PUBLICIP=$(curl -s ipinfo.io/ip)
 
-docker exec -i wordpress_db mysql -u root -pjibpass -e '\
+docker exec -i wordpress_db mysql -u root -pjibpass -e "\
   USE wordpress; \
-	UPDATE wp_options SET option_value = "http://$PUBLICIP:8080" WHERE option_name = "siteurl"; \
-	UPDATE wp_options SET option_value = "http://$PUBLICIP:8080" WHERE option_name = "home";'
+	UPDATE wp_options SET option_value = \"http://$PUBLICIP:8080\" WHERE option_name = 'siteurl'; \
+	UPDATE wp_options SET option_value = \"http://$PUBLICIP:8080\" WHERE option_name = 'home';"
 
