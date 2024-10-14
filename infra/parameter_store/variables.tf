@@ -14,4 +14,5 @@ variable "availability_zone" {
 variable "MYSQL_ROOT_PASSWORD" {
   description = "The root password for MySQL"
   type        = string
+  sensitive = true
 }
