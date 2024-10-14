@@ -9,3 +9,9 @@ variable "availability_zone" {
   description = "The availability zone for the Lightsail disk."
   type        = string
 }
+
+# Variables imported from .env file
+variable "MYSQL_ROOT_PASSWORD" {
+  description = "The root password for MySQL"
+  type        = string
+}
