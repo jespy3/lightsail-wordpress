@@ -1,4 +1,10 @@
-# Parameter store Terraform resource to be defined here
-output "test" {
-  value = "Hello world - this will be replaced with Parameter store TF soon."
+locals {
+  parameter_prefix = "/lightsail-wordpress/compose_environment"
 }
+
+resource "aws_ssm_parameter" "MYSQL_ROOT_PASSWORD" {
+  name  = "${local.parameter_prefix}/MYSQL_ROOT_PASSWORD"
+  type  = "String"
+  value = "bar"
+}
+
