@@ -48,3 +48,21 @@ variable "WORDPRESS_DB_NAME" {
   sensitive = true
 }
 
+variable "allowed_ip" {
+  description = "To be used as terraform vars in the TF project for the core Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
+variable "aws_role" {
+  description = "To be used as terraform vars in the TF project for the core Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
+variable "ls_keypair" {
+  description = "To be used as terraform vars in the TF project for the core Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
