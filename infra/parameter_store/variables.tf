@@ -11,8 +11,40 @@ variable "availability_zone" {
 }
 
 # Variables imported from .env file
+
 variable "MYSQL_ROOT_PASSWORD" {
-  description = "The root password for MySQL"
+  description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
   sensitive = true
 }
+
+variable "MYSQL_DATABASE" {
+  description = "To be used in the compose file's environment variables within the Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
+variable "MYSQL_PASSWORD" {
+  description = "To be used in the compose file's environment variables within the Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
+variable "WORDPRESS_DB_USER" {
+  description = "To be used in the compose file's environment variables within the Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
+variable "WORDPRESS_DB_PASSWORD" {
+  description = "To be used in the compose file's environment variables within the Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
+variable "WORDPRESS_DB_NAME" {
+  description = "To be used in the compose file's environment variables within the Lightsail instance."
+  type        = string
+  sensitive = true
+}
+
