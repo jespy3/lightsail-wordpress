@@ -30,6 +30,12 @@ variable "MYSQL_PASSWORD" {
   sensitive   = true
 }
 
+variable "MYSQL_USER" {
+  description = "To be used in the compose file's environment variables within the Lightsail instance."
+  type        = string
+  sensitive   = true
+}
+
 variable "WORDPRESS_DB_USER" {
   description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
