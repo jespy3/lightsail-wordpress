@@ -4,7 +4,7 @@ resource "aws_iam_user" "user_data_script" {
 
 data "aws_iam_policy_document" "user_data_script" {
   statement {
-    sid = "ParameterStore"
+    sid    = "ParameterStore"
     effect = "Allow"
     actions = [
       "ssm:GetParameter",
@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "user_data_script" {
   }
 
   statement {
-    sid = "KMS"
+    sid    = "KMS"
     effect = "Allow"
     actions = [
       "kms:Decrypt",
