@@ -40,6 +40,6 @@ resource "aws_lightsail_disk_attachment" "db_data_attachment" {
   instance_name = aws_lightsail_instance.wordpress_and_db.name
   disk_path     = "/dev/xvdf"
 
-  depends_on = [ aws_lightsail_instance.wordpress_and_db ]
+  depends_on = [aws_lightsail_instance.wordpress_and_db]
 }
 

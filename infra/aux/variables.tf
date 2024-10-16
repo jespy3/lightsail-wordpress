@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 
 variable "availability_zone" {
-  default = "us-west-2d"
+  default     = "us-west-2d"
   description = "The availability zone for the Lightsail disk."
   type        = string
 }
@@ -15,54 +15,54 @@ variable "availability_zone" {
 variable "MYSQL_ROOT_PASSWORD" {
   description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "MYSQL_DATABASE" {
   description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "MYSQL_PASSWORD" {
   description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "WORDPRESS_DB_USER" {
   description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "WORDPRESS_DB_PASSWORD" {
   description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "WORDPRESS_DB_NAME" {
   description = "To be used in the compose file's environment variables within the Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "allowed_ip" {
   description = "To be used as terraform vars in the TF project for the core Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "aws_role" {
   description = "To be used as terraform vars in the TF project for the core Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "ls_keypair" {
   description = "To be used as terraform vars in the TF project for the core Lightsail instance."
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 

@@ -5,15 +5,15 @@ variable "aws_region" {
 }
 
 variable "availability_zone" {
-  type = string
+  type        = string
   description = "The AWS availability zone the resources are in."
-  default = "us-west-2d"
+  default     = "us-west-2d"
 }
 
 variable "disk_name" {
-  type = string
+  type        = string
   description = "The AWS availability zone the resources are in."
-  default = "db_data"
+  default     = "db_data"
 }
 
 locals {
