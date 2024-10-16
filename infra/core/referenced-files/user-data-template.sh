@@ -61,6 +61,9 @@ aws_secret_access_key = ${aws_secret_access_key}
 region = us-west-2
 EOF
 
+# Ensure only owner can read and write
+chmod 600 /home/admin/.aws/credentials
+
 # Create the mount point if it doesn't exist
 mkdir -p /mnt/wordpress-db
 
