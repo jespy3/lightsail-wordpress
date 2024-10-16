@@ -42,7 +42,7 @@ echo "Completed installing Docker and docker compose."
 
 # Create the compose.yaml file, where the keyword is replaced by terraform file
 cat <<EOL > /home/admin/compose.yaml
-DOCKER_COMPOSE_CONTENTS
+${docker_compose_content}
 EOL
 
 if [ -f /home/admin/compose.yaml ]; then
@@ -56,8 +56,8 @@ mkdir -p /home/admin/.aws
 
 cat <<EOF > /home/admin/.aws/credentials
 [default]
-aws_access_key_id = AWS_ACCESS_KEY_ID_PLACEHOLDER
-aws_secret_access_key = AWS_SECRET_ACCESS_KEY_PLACEHOLDER
+aws_access_key_id = ${aws_access_key_id}
+aws_secret_access_key = ${aws_secret_access_key}
 region = us-west-2
 EOF
 
