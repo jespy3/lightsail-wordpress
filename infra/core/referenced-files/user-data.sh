@@ -51,6 +51,16 @@ else
     echo "Failed to create compose.yaml."
 fi
 
+# Steps to set up AWS credentials
+mkdir -p /home/admin/.aws
+
+cat <<EOF > /home/admin/.aws/credentials
+[default]
+aws_access_key_id = AWS_ACCESS_KEY_ID_PLACEHOLDER
+aws_secret_access_key = AWS_SECRET_ACCESS_KEY_PLACEHOLDER
+region = us-west-2
+EOF
+
 # Create the mount point if it doesn't exist
 mkdir -p /mnt/wordpress-db
 

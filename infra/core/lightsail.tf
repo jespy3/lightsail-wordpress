@@ -1,3 +1,28 @@
+locals {
+  docker_compose_content = file("${path.module}/referenced-files/compose-file-in-container.yaml")
+
+  # Replace placeholder in the user-data script with Docker Compose content
+  base_user_data = replace(
+    file("${path.module}/referenced-files/user-data.sh"),
+    "DOCKER_COMPOSE_CONTENTS",
+    local.docker_compose_content
+  )
+
+  # Inject access key
+  user_data_with_first_key = replace(
+    local.base_user_data,
+    "AWS_ACCESS_KEY_ID_PLACEHOLDER",
+    aws_iam_access_key.user_data_script.id
+  )
+
+  # Inject secret key
+  user_data_with_keys = replace(
+    local.user_data_with_first_key,
+    "AWS_SECRET_ACCESS_KEY_PLACEHOLDER",
+    aws_iam_access_key.user_data_script.secret
+  )
+}
+
 resource "aws_lightsail_instance" "wordpress_and_db" {
   name              = "wordpress_and_db"
   availability_zone = var.availability_zone
@@ -6,12 +31,7 @@ resource "aws_lightsail_instance" "wordpress_and_db" {
   key_pair_name     = local.ls_keypair
   ip_address_type   = "ipv4"
 
-  # Replace the placeholder in user-data.sh with the docker-compose.yaml content
-  user_data = replace(
-    file("${path.module}/referenced-files/user-data.sh"),
-    "DOCKER_COMPOSE_CONTENTS",
-    file("${path.module}/referenced-files/compose-file-in-container.yaml")
-  )
+  user_data = local.user_data_with_keys
 }
 
 resource "aws_lightsail_instance_public_ports" "instance_ports" {
