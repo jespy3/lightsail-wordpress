@@ -14,6 +14,17 @@ data "aws_iam_policy_document" "user_data_script" {
       "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter/lightsail-wordpress/compose_environment/*",
     ]
   }
+
+  statement {
+    sid = "KMS"
+    effect = "Allow"
+    actions = [
+      "kms:Decrypt",
+    ]
+    resources = [
+      "arn:aws:kms:${var.aws_region}:${data.aws_caller_identity.current.account_id}:alias/aws/ssm",
+    ]
+  }
 }
 
 resource "aws_iam_policy" "user_data_script" {
