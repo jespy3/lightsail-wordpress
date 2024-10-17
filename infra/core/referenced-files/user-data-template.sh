@@ -40,6 +40,30 @@ apt-get install -y docker-compose-plugin
 
 echo "Completed installing Docker and docker compose."
 
+# Steps to set up AWS credentials
+mkdir -p /home/admin/.aws
+
+cat <<EOF > /home/admin/.aws/credentials
+[default]
+aws_access_key_id = ${aws_access_key_id}
+aws_secret_access_key = ${aws_secret_access_key}
+EOF
+
+# Ensure only owner can read and write
+chmod 600 /home/admin/.aws/credentials
+
+# Ensuring the credentials file is used before awscli commands
+export AWS_SHARED_CREDENTIALS_FILE=/home/admin/.aws/credentials
+
+# Retrieve values from Parameter Store and set them as environment variables
+export MYSQL_ROOT_PASSWORD=$(aws ssm get-parameter --name "/lightsail-wordpress/compose_environment/MYSQL_ROOT_PASSWORD" --with-decryption --query "Parameter.Value" --output text)
+export MYSQL_DATABASE=$(aws ssm get-parameter --name "/lightsail-wordpress/compose_environment/MYSQL_DATABASE" --with-decryption --query "Parameter.Value" --output text)
+export MYSQL_PASSWORD=$(aws ssm get-parameter --name "/lightsail-wordpress/compose_environment/MYSQL_PASSWORD" --with-decryption --query "Parameter.Value" --output text)
+export MYSQL_USER=$(aws ssm get-parameter --name "/lightsail-wordpress/compose_environment/MYSQL_USER" --with-decryption --query "Parameter.Value" --output text)
+export WORDPRESS_DB_NAME=$(aws ssm get-parameter --name "/lightsail-wordpress/compose_environment/WORDPRESS_DB_NAME" --with-decryption --query "Parameter.Value" --output text)
+export WORDPRESS_DB_PASSWORD=$(aws ssm get-parameter --name "/lightsail-wordpress/compose_environment/WORDPRESS_DB_PASSWORD" --with-decryption --query "Parameter.Value" --output text)
+export WORDPRESS_DB_USER=$(aws ssm get-parameter --name "/lightsail-wordpress/compose_environment/WORDPRESS_DB_USER" --with-decryption --query "Parameter.Value" --output text)
+
 # Create the compose.yaml file, where the keyword is replaced by terraform file
 cat <<EOL > /home/admin/compose.yaml
 ${docker_compose_content}
@@ -51,18 +75,14 @@ else
     echo "Failed to create compose.yaml."
 fi
 
-# Steps to set up AWS credentials
-mkdir -p /home/admin/.aws
-
-cat <<EOF > /home/admin/.aws/credentials
-[default]
-aws_access_key_id = ${aws_access_key_id}
-aws_secret_access_key = ${aws_secret_access_key}
-region = us-west-2
-EOF
-
-# Ensure only owner can read and write
-chmod 600 /home/admin/.aws/credentials
+# Unset exported variables for safety
+unset MYSQL_ROOT_PASSWORD
+unset MYSQL_DATABASE
+unset MYSQL_PASSWORD
+unset MYSQL_USER
+unset WORDPRESS_DB_NAME
+unset WORDPRESS_DB_PASSWORD
+unset WORDPRESS_DB_USER
 
 # Create the mount point if it doesn't exist
 mkdir -p /mnt/wordpress-db
