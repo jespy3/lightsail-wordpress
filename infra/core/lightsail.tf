@@ -18,6 +18,8 @@ resource "aws_lightsail_instance" "wordpress_and_db" {
   ip_address_type   = "ipv4"
 
   user_data = local.user_data_with_keys
+
+  depends_on = [aws_iam_access_key.user_data_script]
 }
 
 resource "aws_lightsail_instance_public_ports" "instance_ports" {
