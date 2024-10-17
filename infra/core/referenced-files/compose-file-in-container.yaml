@@ -8,10 +8,10 @@ services:
       - wp_net
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: jibpass  # Define the root password for the database
-      MYSQL_DATABASE: wordpress                # Create a default database for WordPress
-      MYSQL_USER: jib               # Define a non-root user for WordPress
-      MYSQL_PASSWORD: jibpass       # Define the password for the WordPress user
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
   wordpress:
     image: wordpress:latest
@@ -26,10 +26,10 @@ services:
       - wp_net
     restart: always
     environment:
-      WORDPRESS_DB_HOST: db:3306               # Connect to the MySQL database
-      WORDPRESS_DB_USER: jib        # Same credentials as above
-      WORDPRESS_DB_PASSWORD: jibpass
-      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
 
 volumes:
   db_data:    # Persistent volume for MySQL data
