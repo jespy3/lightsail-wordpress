@@ -129,3 +129,7 @@ docker exec -i wordpress_app find $WP_DIR -type f -exec chmod 644 {} \;
 # Secure wp-config.php
 docker exec -i wordpress_app chmod 600 $WP_DIR/wp-config.php
 
+# Installing certbot and docker plugin for nginx
+apt-get install -y certbot
+apt-get install -y python3-certbot-nginx
+
