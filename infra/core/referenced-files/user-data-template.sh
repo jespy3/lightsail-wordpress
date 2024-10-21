@@ -116,3 +116,16 @@ docker exec -i wordpress_db mysql -u root -pjibpass -e "\
 	UPDATE wp_options SET option_value = \"http://$PUBLICIP:8080\" WHERE option_name = 'siteurl'; \
 	UPDATE wp_options SET option_value = \"http://$PUBLICIP:8080\" WHERE option_name = 'home';"
 
+
+# Security hardening steps
+WP_DIR="/var/www/html"
+
+# Set directory permissions to 755 (rwxr-xr-x)
+docker exec -i wordpress_app find $WP_DIR -type d -exec chmod 755 {} \;
+
+# Set file permissions to 644 (rw-r--r--)
+docker exec -i wordpress_app find $WP_DIR -type f -exec chmod 644 {} \;
+
+# Secure wp-config.php
+docker exec -i wordpress_app chmod 600 $WP_DIR/wp-config.php
+
