@@ -3,8 +3,8 @@ locals {
 
   # Generate user data script from the template file
   user_data_with_keys = templatefile("${path.module}/referenced-files/user-data-template.sh", {
-    aws_access_key_id     = aws_iam_access_key.user_data_script.id
-    aws_secret_access_key = aws_iam_access_key.user_data_script.secret
+    aws_access_key_id      = aws_iam_access_key.user_data_script.id
+    aws_secret_access_key  = aws_iam_access_key.user_data_script.secret
     docker_compose_content = local.docker_compose_content
   })
 }
