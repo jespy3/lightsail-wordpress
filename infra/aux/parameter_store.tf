@@ -16,6 +16,7 @@ locals {
     "allowed_ip" = var.allowed_ip
     "aws_role"   = var.aws_role
     "ls_keypair" = var.ls_keypair
+    "domain_name"= var.domain_name
   }
 }
 

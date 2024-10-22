@@ -72,3 +72,8 @@ variable "ls_keypair" {
   sensitive   = true
 }
 
+variable "domain_name" {
+  description = "To be used as terraform vars in the TF project for the core Lightsail instance."
+  type        = string
+  sensitive   = true
+}
