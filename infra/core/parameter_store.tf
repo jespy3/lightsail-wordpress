@@ -10,3 +10,7 @@ data "aws_ssm_parameter" "allowed_ip" {
   name = "/lightsail-wordpress/terraform_vars/allowed_ip"
 }
 
+data "aws_ssm_parameter" "domain_name" {
+  name = "/lightsail-wordpress/terraform_vars/domain_name"
+}
+

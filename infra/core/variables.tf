@@ -22,6 +22,7 @@ variable "injected_key_status" {
 }
 
 locals {
-  ls_keypair = data.aws_ssm_parameter.ls_keypair.value
-  allowed_ip = data.aws_ssm_parameter.allowed_ip.value
+  ls_keypair  = data.aws_ssm_parameter.ls_keypair.value
+  allowed_ip  = data.aws_ssm_parameter.allowed_ip.value
+  domain_name = data.aws_ssm_parameter.domain_name.value
 }
